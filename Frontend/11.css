@@ -1,0 +1,63 @@
+/* Estilos globales y de fondo */
+body {
+    background-image: url("img1.PNG");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Estilos de la Cabecera */
+.cabecera {
+    background-image: url('img2.PNG');
+    background-size: cover;
+    background-position: center;
+    height: 120px;
+}
+
+/* Estilos de botones generales */
+.btn-login {
+    background-color: #636569;
+    width: 160px;
+    height: 38px;
+    border: none;
+}
+
+.btn-dropdown {
+    background-color: #6f1d46;
+    border: none;
+    width: 250px;
+    height: 32px;
+}
+
+.btn-search {
+    background-image: url('img2.PNG');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    height: 32px;
+    width: 32px;
+}
+
+/* Estilos de menús */
+.menu-fondo {
+    background-color: #6f1d46;
+}
+
+/* --- Estilos para los submenús (Despliegue hacia abajo) --- */
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu > .dropdown-menu {
+    top: 100%;  /* Se posiciona justo debajo del elemento padre */
+    left: 0;    /* Alineado a la izquierda del padre */
+    margin-top: 0; 
+    min-width: 100%;
+}
+
+/* Muestra el submenú al pasar el ratón */
+.dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+}

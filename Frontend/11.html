@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Proyecto</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="11.css">
+</head>
+
+<body>
+    <div class="vh-100">
+        <div class="p-4 mb-2 text-white cabecera">
+            <button class="p-1 d-flex justify-content-center align-content-center text-white rounded-3 btn-login"
+                    type="button" onclick="window.location.href='usuario/sing-in.html';">
+                Iniciar Sesión
+            </button>
+        </div>
+
+        <div class="contenido">
+            <div class="input-group p-4 mb-2">
+                <div class="dropdown">
+                    <button class="text-white p-1 d-flex justify-content-center align-items-center btn-dropdown"
+                            data-bs-toggle="dropdown">
+                        --------
+                    </button>
+                    
+                    <ul class="dropdown-menu menu-fondo">
+                        <li class="dropdown-submenu">
+                          <a class="dropdown-item text-white menu-fondo" href="#">Categoría</a>
+                            <ul class="dropdown-menu menu-fondo">
+                            <li><a class="dropdown-item text-white" href="categoria/series.html">Series</a></li>
+                                
+                                <li><a class="dropdown-item text-white" href="#">Deportes</a></li>
+                                <li><a class="dropdown-item text-white" href="#">Música</a></li>
+                                <li><a class="dropdown-item text-white" href="#">Ciencia</a></li>
+                                <li><a class="dropdown-item text-white" href="#">Cultura</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item text-white menu-fondo" href="#">Conductor</a>
+                            <ul class="dropdown-menu menu-fondo">
+                                <li><a class="dropdown-item text-white" href="#">op1</a></li>
+                                <li><a class="dropdown-item text-white" href="#">op2</a></li>
+                                <li><a class="dropdown-item text-white" href="#">op3</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item text-white menu-fondo" href="#">Prog. Nacional</a>
+                            <ul class="dropdown-menu menu-fondo">
+                                <li><a class="dropdown-item text-white" href="#">op1</a></li>
+                                <li><a class="dropdown-item text-white" href="#">op2</a></li>
+                                <li><a class="dropdown-item text-white" href="#">op3</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item text-white menu-fondo" href="#">Prog. Infantil</a>
+                            <ul class="dropdown-menu menu-fondo">
+                                <li><a class="dropdown-item text-white" href="#">op1</a></li>
+                                <li><a class="dropdown-item text-white" href="#">op2</a></li>
+                                <li><a class="dropdown-item text-white" href="#">op3</a></li>
+                            </ul>
+                        </li>
+                        </ul>
+                </div>
+
+                <button class="text-white p-2 d-flex justify-content-center align-content-center btn-search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
