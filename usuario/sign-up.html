@@ -36,19 +36,18 @@
   <body class="text-center">
     
 <main class="form-signin">
-  <form>
-    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+  <form action="sign-up.php" method="POST">
+    <h1 class="h3 mb-3 fw-normal">Registro.</h1>
 
     <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInput" placeholder="User">
-      <label for="floatingInput">User</label>
+      <input type="text" class="form-control" name="nombre_usuario" id="floatingInput" placeholder="User" required>
+      <label for="floatingInput">Usuario</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Password</label>
+      <input type="password" class="form-control" name ="contrasena" id="floatingPassword" placeholder="Password" required>
+      <label for="floatingPassword">Contraseña</label>
     </div>
-    
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Registrar</button>
   </form>
 </main>
 

@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
-ini_set('display_errors', 0);
 
 header('Content-Type: application/json; charset=utf-8');
 $pdo = new PDO("mysql:host=127.0.0.1;port=3307;dbname=maindatabase;charset=utf8mb4", "root", "");

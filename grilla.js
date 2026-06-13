@@ -1,4 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => 
+    {
     const botonHome = document.querySelector('.btn-home');
     const lienzo = document.getElementById('grilla');
     const menuDesplegable = document.querySelector('.dropdown-menu');
