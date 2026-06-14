@@ -38,15 +38,15 @@
 <body class="text-center">
 
   <main class="form-signin">
-    <form>
+    <form action="sign-in.php" method="POST">
       <h1 class="h3 mb-3 fw-normal">Inicio de sesión.</h1>
 
       <div class="form-floating">
-        <input type="text" class="form-control" id="floatingInput" placeholder="User">
+        <input type="text" name="nombre_usuario" class="form-control" id="floatingInput" placeholder="User">
         <label for="floatingInput">Usuario</label>
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <input type="password" name="contrasena" class="form-control" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">Contraseña</label>
       </div>
       <div class="input-group d-flex gap-4 justify-content-center">
