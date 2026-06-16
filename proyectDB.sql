@@ -8,18 +8,7 @@ CREATE TABLE Rol
   PRIMARY KEY (id_rol)
 );
 
-CREATE TABLE Usuario
-(
-  id_usuario INT NOT NULL AUTO_INCREMENT,
-  nombres VARCHAR(100) NOT NULL,
-  apellidos VARCHAR(100) NOT NULL,
-  correo VARCHAR(150) NOT NULL,
-  contrasena_hash VARCHAR(255) NOT NULL,
-  id_rol INT NOT NULL,
-  PRIMARY KEY (id_usuario),
-  FOREIGN KEY (id_rol) REFERENCES Rol(id_rol),
-  UNIQUE (correo)
-);
+
 
 CREATE TABLE Clasificacion_edad
 (
@@ -119,43 +108,9 @@ INSERT INTO Senal (nombre_senal) VALUES
 ('Once Niñas y Niños (Señal 11.2)'),
 ('Once Internacional');
 
--- =======================================================
--- 1. POBLAR TABLA USUARIOS (30 Registros)
--- Contraseñas simuladas con Hash (Bcrypt) por seguridad
--- =======================================================
-INSERT INTO Usuario (nombres, apellidos, correo, contrasena_hash, id_rol) VALUES 
-('Carlos', 'Slim Helú', 'carlos.slim@mail.com', '$2y$10$xyz123hashinventado1', 2),
-('Carmen', 'Aristegui', 'carmen.a@mail.com', '$2y$10$xyz123hashinventado2', 1),
-('Guillermo', 'Del Toro', 'memo.dt@mail.com', '$2y$10$xyz123hashinventado3', 1),
-('Alfonso', 'Cuarón', 'alfonso.c@mail.com', '$2y$10$xyz123hashinventado4', 1),
-('Salma', 'Hayek', 'salma.h@mail.com', '$2y$10$xyz123hashinventado5', 1),
-('Gael', 'García Bernal', 'gael.gb@mail.com', '$2y$10$xyz123hashinventado6', 1),
-('Diego', 'Luna', 'diego.l@mail.com', '$2y$10$xyz123hashinventado7', 1),
-('Eugenio', 'Derbez', 'eugenio.d@mail.com', '$2y$10$xyz123hashinventado8', 1),
-('Yalitza', 'Aparicio', 'yalitza.a@mail.com', '$2y$10$xyz123hashinventado9', 1),
-('Thalía', 'Sodi', 'thalia.s@mail.com', '$2y$10$xyz123hashinventado10', 1),
-('Lucero', 'Hogaza', 'lucero.h@mail.com', '$2y$10$xyz123hashinventado11', 1),
-('Luis', 'Miguel', 'luismi@mail.com', '$2y$10$xyz123hashinventado12', 1),
-('Vicente', 'Fernández', 'chente.f@mail.com', '$2y$10$xyz123hashinventado13', 1),
-('Alejandro', 'Fernández', 'alex.f@mail.com', '$2y$10$xyz123hashinventado14', 1),
-('Paulina', 'Rubio', 'pau.r@mail.com', '$2y$10$xyz123hashinventado15', 1),
-('Gloria', 'Trevi', 'gloria.t@mail.com', '$2y$10$xyz123hashinventado16', 1),
-('Alejandra', 'Guzmán', 'aleguz@mail.com', '$2y$10$xyz123hashinventado17', 1),
-('Belinda', 'Peregrín', 'beli.p@mail.com', '$2y$10$xyz123hashinventado18', 1),
-('Danna', 'Paola', 'danna.p@mail.com', '$2y$10$xyz123hashinventado19', 1),
-('Christian', 'Nodal', 'chris.n@mail.com', '$2y$10$xyz123hashinventado20', 1),
-('Carlos', 'Rivera', 'carlos.r@mail.com', '$2y$10$xyz123hashinventado21', 1),
-('Yuri', 'Valenzuela', 'yuri.v@mail.com', '$2y$10$xyz123hashinventado22', 1),
-('Chayanne', 'Figueroa', 'chayanne.f@mail.com', '$2y$10$xyz123hashinventado23', 1),
-('Ricky', 'Martin', 'ricky.m@mail.com', '$2y$10$xyz123hashinventado24', 1),
-('Shakira', 'Mebarak', 'shaki.m@mail.com', '$2y$10$xyz123hashinventado25', 1),
-('Juan', 'es', 'juanes.a@mail.com', '$2y$10$xyz123hashinventado26', 1),
-('Maluma', 'Londoño', 'maluma.l@mail.com', '$2y$10$xyz123hashinventado27', 1),
-('J', 'Balvin', 'jbalvin.o@mail.com', '$2y$10$xyz123hashinventado28', 1),
-('Bad', 'Bunny', 'bad.b@mail.com', '$2y$10$xyz123hashinventado29', 2),
-('Rosalía', 'Vila', 'rosalia.v@mail.com', '$2y$10$xyz123hashinventado30', 2);
+TRUNCATE TABLE Usuario;
 
---=======================================================
+-- =======================================================
 -- 2. POBLAR TABLA PROGRAMAS (30 Registros)
 -- Combinando Nacionales, Infantiles, Categorías y Clasificación
 -- =======================================================
@@ -412,11 +367,15 @@ CALL sp_ResumenDiarioSenal('2026-06-07', 1);
 -- y la clasificación de edad.
 -- =============================================================================================
 
-CREATE VIEW vw_CarteleraPublico AS
+drop view vw_cartelerapublico;
+
+CREATE OR REPLACE VIEW vw_CarteleraPublico AS
 SELECT 
-    p.titulo AS Programa,
-    TIME_FORMAT(h.hora_inicio, '%H:%i') AS Inicia,
-    TIME_FORMAT(h.hora_fin, '%H:%i') AS Termina
+    p.id_programa,
+    p.titulo,
+    TIME_FORMAT(h.hora_inicio, '%H:%i') AS hora_inicio,
+    TIME_FORMAT(h.hora_fin, '%H:%i') AS hora_fin,
+    s.nombre_senal
 FROM Horario h
 JOIN Programa p ON h.id_programa = p.id_programa
 JOIN Senal s ON h.id_senal = s.id_senal
@@ -599,3 +558,68 @@ UPDATE Horario SET hora_inicio = '06:30:00' WHERE id_horario = 1;
 SELECT * FROM Auditoria_Horario;
 
 select * from vw_CarteleraPublico;
+
+drop table Usuario;
+
+show tables;
+
+CREATE TABLE usuario_admin
+(
+  id_usuario INT NOT NULL AUTO_INCREMENT,
+  nombre_usuario VARCHAR(100) NOT NULL,
+  contrasena_hash VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id_usuario),
+  UNIQUE (nombre_usuario)
+);
+
+truncate usuario_admin;
+
+select * from usuario_admin;
+
+show tables;
+
+select * from conductor;
+
+select * from programa;
+
+SELECT p.id_programa, p.titulo, TIME_FORMAT(h.hora_inicio, '%H:%i') AS hora_inicio, TIME_FORMAT(h.hora_fin, '%H:%i') AS hora_fin
+                FROM horario h JOIN programa p ON h.id_programa = p.id_programa 
+                WHERE p.id_categoria = 1;
+                
+SELECT id_programa, titulo, hora_inicio, hora_fin
+                FROM vw_CarteleraPublico 
+                WHERE Senal = "Once (Señal Nacional 11.1)";
+                
+select * from vw_cartelerapublico;
+
+select * from senal;
+
+SELECT id_programa, titulo, hora_inicio, hora_fin
+FROM vw_CarteleraPublico 
+WHERE nombre_senal = "Once (Señal Nacional 11.1)";
+
+select * from conductor;
+
+SELECT p.id_programa, p.titulo, TIME_FORMAT(h.hora_inicio, '%H:%i') AS hora_inicio, TIME_FORMAT(h.hora_fin, '%H:%i') AS hora_fin
+                FROM programa_conductor pc
+                JOIN conductor c ON pc.id_conductor = c.id_conductor 
+                JOIN programa p ON pc.id_programa = p.id_programa 
+                JOIN horario h ON h.id_programa = p.id_programa
+                WHERE c.id_conductor = 1;
+
+SELECT p.id_programa, p.titulo, TIME_FORMAT(h.hora_inicio, '%H:%i') AS hora_inicio, TIME_FORMAT(h.hora_fin, '%H:%i') AS hora_fin
+                FROM horario h JOIN programa p ON h.id_programa = p.id_programa 
+                WHERE p.id_categoria = 1;
+                
+SELECT id_programa, titulo, hora_inicio, hora_fin
+                FROM vw_CarteleraPublico 
+                WHERE nombre_senal = "Once Niñas y Niños (Señal 11.2)";
+                
+SELECT p.id_programa, p.titulo, TIME_FORMAT(h.hora_inicio, '%H:%i') AS hora_inicio, TIME_FORMAT(h.hora_fin, '%H:%i') AS hora_fin
+                FROM programa_conductor pc
+                JOIN conductor c ON pc.id_conductor = c.id_conductor 
+                JOIN programa p ON pc.id_programa = p.id_programa 
+                JOIN horario h ON h.id_programa = p.id_programa
+                WHERE c.id_conductor = 1;
+                
+SELECT titulo, descripcion FROM programa WHERE id_programa = 1;

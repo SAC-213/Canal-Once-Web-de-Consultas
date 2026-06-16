@@ -7,19 +7,19 @@ $id = $_GET['id'] ?? '';
 
 switch ($accion) {
     case 'categoria':
-        $sql = "SELECT p.titulo, TIME_FORMAT(h.hora_inicio, '%H:%i') AS hora_inicio, TIME_FORMAT(h.hora_fin, '%H:%i') AS hora_fin
+        $sql = "SELECT p.id_programa, p.titulo, TIME_FORMAT(h.hora_inicio, '%H:%i') AS hora_inicio, TIME_FORMAT(h.hora_fin, '%H:%i') AS hora_fin
                 FROM horario h JOIN programa p ON h.id_programa = p.id_programa 
                 WHERE p.id_categoria = :busqueda";
         break;
 
     case 'programacion':
-        $sql = "SELECT titulo, hora_inicio, hora_fin
+        $sql = "SELECT id_programa, titulo, hora_inicio, hora_fin
                 FROM vw_CarteleraPublico 
-                WHERE Senal = :busqueda;";
+                WHERE nombre_senal = :busqueda";
         break;
 
     case 'conductor':
-        $sql = "SELECT p.titulo, TIME_FORMAT(h.hora_inicio, '%H:%i') AS hora_inicio, TIME_FORMAT(h.hora_fin, '%H:%i') AS hora_fin
+        $sql = "SELECT p.id_programa, p.titulo, TIME_FORMAT(h.hora_inicio, '%H:%i') AS hora_inicio, TIME_FORMAT(h.hora_fin, '%H:%i') AS hora_fin
                 FROM programa_conductor pc
                 JOIN conductor c ON pc.id_conductor = c.id_conductor 
                 JOIN programa p ON pc.id_programa = p.id_programa 

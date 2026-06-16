@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => 
     {
-    const botonHome = document.querySelector('.btn-home');
     const lienzo = document.getElementById('grilla');
     const menuDesplegable = document.querySelector('.dropdown-menu');
 
     menuDesplegable.addEventListener('click', (event) => {
         const el = event.target;
+        document.getElementById('btn-selector').textContent = el.getAttribute('name');
         const cond = el.getAttribute('data-conductor');
         const cat = el.getAttribute('data-categoria');
         const prog = el.getAttribute('data-programacion');
@@ -47,22 +47,19 @@ document.addEventListener('DOMContentLoaded', () =>
         datos.forEach(item => {
             const cuadrito = `
                 <div class="col">
-                    <div class="card bg-dark text-white shadow-sm">
+                <a href="detalles.php?id=${item.id_programa}" class="text-decoration-none text-white">
+                    <div class="card bg-dark text-white shadow-sm h-100">
                         <div class="card-body">
                             <h5 class="card-title">${item.titulo}</h5>
                             <p class="card-text">Inicia: ${item.hora_inicio}</p>
                             <p class="card-text">Termina: ${item.hora_fin}</p>
                         </div>
                     </div>
-                </div>
-            `;
+                </a>
+            </div>
+        `;
             lienzo.innerHTML += cuadrito;
         });
     }
-
-    botonHome.addEventListener('click', () => {
-        lienzo.innerHTML = '';
-        console.log("Pantalla limpiada");
-    });
 }
 );
