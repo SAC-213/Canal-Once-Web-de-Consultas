@@ -1,7 +1,38 @@
-document.addEventListener('DOMContentLoaded', () => 
-    {
+document.addEventListener('DOMContentLoaded', () => {
     const lienzo = document.getElementById('grilla');
     const menuDesplegable = document.querySelector('.dropdown-menu');
+
+    const infantil = document.getElementById('infantil');
+    const aa = document.getElementById('clas1');
+    const radiobtns = document.getElementById('radio-clas');
+
+    const conductorCheck = document.getElementById('check8');
+    const conductorSelect = document.getElementById('conductorSelect');
+
+    document.querySelector('form').addEventListener('submit', function () {
+        document.getElementById('conductorSelect').disabled = false;
+    });
+
+    conductorCheck.addEventListener('change', () => {
+        conductorSelect.disabled = !conductorCheck.checked;
+
+        if (conductorSelect.disabled) {
+            conductorSelect.value = '';
+        }
+    });
+
+    function sincronizar(origen, destino) {
+        destino.checked = origen.checked;
+        console.log(`Sincronizado: ${origen.id} -> ${destino.id}`);
+    }
+
+    infantil.addEventListener('click', () => {
+        sincronizar(infantil, aa);
+    });
+
+    radiobtns.addEventListener('click', () => {
+        sincronizar(aa, infantil);
+    });
 
     menuDesplegable.addEventListener('click', (event) => {
         const el = event.target;
@@ -10,20 +41,16 @@ document.addEventListener('DOMContentLoaded', () =>
         const cat = el.getAttribute('data-categoria');
         const prog = el.getAttribute('data-programacion');
 
-        if (cond || cat || prog)
-        {
+        if (cond || cat || prog) {
             event.preventDefault();
 
-            if (cond)
-            {
+            if (cond) {
                 cargarDatos("conductor", cond);
             }
-            else if (cat) 
-            {
+            else if (cat) {
                 cargarDatos("categoria", cat);
             }
-            else if (prog)
-            {
+            else if (prog) {
                 cargarDatos("programacion", prog);
             }
         }

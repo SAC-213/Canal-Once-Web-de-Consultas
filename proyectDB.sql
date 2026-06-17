@@ -366,9 +366,6 @@ CALL sp_ResumenDiarioSenal('2026-06-07', 1);
 -- uniendo la información del horario, el nombre del programa, la señal por la que se transmite 
 -- y la clasificación de edad.
 -- =============================================================================================
-
-drop view vw_cartelerapublico;
-
 CREATE OR REPLACE VIEW vw_CarteleraPublico AS
 SELECT 
     p.id_programa,
@@ -376,10 +373,10 @@ SELECT
     TIME_FORMAT(h.hora_inicio, '%H:%i') AS hora_inicio,
     TIME_FORMAT(h.hora_fin, '%H:%i') AS hora_fin,
     s.nombre_senal
-FROM Horario h
-JOIN Programa p ON h.id_programa = p.id_programa
-JOIN Senal s ON h.id_senal = s.id_senal
-JOIN Clasificacion_edad c ON p.id_clasificacion = c.id_clasificacion;
+FROM Programa p
+LEFT JOIN Horario h ON p.id_programa = h.id_programa
+LEFT JOIN Senal s ON h.id_senal = s.id_senal
+LEFT JOIN Clasificacion_edad c ON p.id_clasificacion = c.id_clasificacion;
 
 -- ================================================================================================
 -- vw_CatalogoProgramas:
@@ -613,7 +610,7 @@ SELECT p.id_programa, p.titulo, TIME_FORMAT(h.hora_inicio, '%H:%i') AS hora_inic
                 
 SELECT id_programa, titulo, hora_inicio, hora_fin
                 FROM vw_CarteleraPublico 
-                WHERE nombre_senal = "Once Niñas y Niños (Señal 11.2)";
+                WHERE nombre_senal = "Once Niñas y Niños (Señal 11.2)"; -- Once (Señal Nacional 11.1)
                 
 SELECT p.id_programa, p.titulo, TIME_FORMAT(h.hora_inicio, '%H:%i') AS hora_inicio, TIME_FORMAT(h.hora_fin, '%H:%i') AS hora_fin
                 FROM programa_conductor pc
@@ -623,3 +620,48 @@ SELECT p.id_programa, p.titulo, TIME_FORMAT(h.hora_inicio, '%H:%i') AS hora_inic
                 WHERE c.id_conductor = 1;
                 
 SELECT titulo, descripcion FROM programa WHERE id_programa = 1;
+
+show tables;
+
+select * from horario;
+
+select * from programa;
+
+INSERT INTO Programa (titulo, descripcion, es_nacional, es_infantil, id_clasificacion, id_categoria) VALUES 
+();
+
+
+select * from conductor;	
+
+select * from horario;
+
+ALTER TABLE horario 
+DROP COLUMN fecha_emision;
+
+SELECT * FROM horario WHERE id_programa = 50;
+
+SELECT p.id_programa, p.titulo, TIME_FORMAT(h.hora_inicio, '%H:%i') AS hora_inicio, TIME_FORMAT(h.hora_fin, '%H:%i') AS hora_fin
+                FROM horario h JOIN programa p ON h.id_programa = p.id_programa 
+                WHERE p.id_categoria = 4;
+
+SELECT * FROM vw_cartelerapublico WHERE id_programa = 50;
+
+SELECT * FROM Programa WHERE id_programa = 50;
+
+SELECT 
+    p.id_programa, 
+    p.titulo, 
+    p.id_categoria, 
+    h.id_horario 
+FROM programa p
+LEFT JOIN horario h ON p.id_programa = h.id_programa
+WHERE p.id_programa = 50;
+
+SELECT * FROM vw_CarteleraPublico WHERE id_programa = 50;
+
+SELECT h.id_programa, h.id_senal, p.id_clasificacion
+FROM Horario h
+JOIN Programa p ON h.id_programa = p.id_programa
+WHERE p.id_programa = 50;
+
+select * from programa;
